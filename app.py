@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Wczytanie pliku CSV do DataFrame
-file_path = "/mnt/data/final_data.csv"
+file_path = "/final_data.csv"
 if os.path.exists(file_path):
     df = pd.read_csv(file_path)
 else:

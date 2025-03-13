@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyszukiwarka Produktów</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Wyszukiwarka Produktów</h1>
+        <form method="post">
+            <input type="text" name="ean" placeholder="Wpisz kod EAN" required>
+            <button type="submit">Szukaj</button>
+        </form>
+        {% if product_info %}
+            <div class="result">
+                {% if product_info == "Brak wyników dla podanego kodu EAN." %}
+                    <p>{{ product_info }}</p>
+                {% else %}
+                    <table>
+                        <tr>
+                            {% for key in product_info[0].keys() %}
+                                <th>{{ key }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for product in product_info %}
+                            <tr>
+                                {% for value in product.values() %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
